@@ -38,7 +38,7 @@ export class MovieModel {
     //ELIMINA UNA PELICULA
     static delete = async({id})=>{
     const movieIndex = movies.findIndex(m => m.id === id);
-        if(movieIndex < 0)return false;
+        if(movieIndex < 0) throw new Error('Id Invalid');
 
         movies.splice(movieIndex, 1);
         return true;
@@ -48,7 +48,7 @@ export class MovieModel {
     static update = async({id, input}) =>{
         const movieIndex = movies.findIndex(m => m.id === id);
         
-            if(movieIndex < 0) return false;
+            if(movieIndex < 0) throw new Error('Id invalid');
         
             const movie = movies[movieIndex];
         

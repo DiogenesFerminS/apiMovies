@@ -29,12 +29,13 @@ Content-Type: application/json
 
 ###Editar una pelicula
 
-PATCH http://localhost:3000/movies/fc09b0da-367d-11f0-b9b2-989096acbdd9
+PATCH http://localhost:3000/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
 Content-Type: application/json
 
 {
-  "title": "Inception",
-  "year": 2010
+  "title": "qlqaa",
+  "duration": 100,
+  "year": 1930
 }
 
 ###Eliminar una pelicula 

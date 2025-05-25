@@ -18,12 +18,11 @@ export const createApp = ({movieModel})=>{
 
     //se desactiva para la seguridad
     app.disable('x-powered-by');
-
     //se inicia el servidor en el puerto 
 
-    //app.all('*', (req, res)=>{
-       // res.status(404).json({message: 'Not Found'});
-    // });
+    app.use((req, res)=>{
+       return res.status(404).json({message: 'Route not found'});
+    });
 
     app.use((err, req, res, next)=>{
         //console.log(err);
