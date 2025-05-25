@@ -1,6 +1,7 @@
 import express, { json } from 'express';
 import { createRoutes } from './routes/movies-routes.js';
 import { corsMiddleware } from './middlewares/cors.js';
+import 'dotenv/config.js';
 
 export const createApp = ({movieModel})=>{
     //crea el servidor de express
@@ -19,8 +20,29 @@ export const createApp = ({movieModel})=>{
     app.disable('x-powered-by');
 
     //se inicia el servidor en el puerto 
+
+    //app.all('*', (req, res)=>{
+       // res.status(404).json({message: 'Not Found'});
+    // });
+
+    app.use((err, req, res, next)=>{
+        //console.log(err);
+        const {status = 500, message = 'Internal Server Error'} = err;
+        res.status(status).json({message});
+    });
+
     app.listen(PORT, ()=>{
         console.log(`Servidor iniciado en el puerto ${PORT}`);
     })
 };
+
+const serverType = process.env.SERVER_TYPE ?? 'local';
+
+if(serverType === 'local'){
+    const {MovieModel} = await import('./models/local-file-system/movie.js');
+    createApp({movieModel: MovieModel});
+} else if (serverType === 'mysql') {
+    const {MovieModel} = await import('./models/mySql/movie.js');
+    createApp({movieModel: MovieModel});
+}
 

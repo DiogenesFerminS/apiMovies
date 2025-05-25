@@ -10,11 +10,11 @@ export class MoviesController{
         
         const movies = await this.movieModel.getAll({genre});
 
-        if(movies === null){
-            return res.status(404).json({"message": "genre or movie not found"});
-        }
+        // if(movies === null){
+            throw new Error('No movies found');
+        // }
         //si no se retornan todos
-        res.json(movies);
+        // res.json(movies);
     };
 
     getById = async (req, res)=>{
@@ -32,11 +32,11 @@ export class MoviesController{
          //Se envia a la schema de zod a validar los tipos y retorna succes o error
         const result = validateMovie(req.body);
     
-        if(result.error){
+         if(result.error){
             return res.status(400).json({ error: JSON.parse(result.error.message) });
         }  
         //se guardaria en base de datos
-        const newMovie = await this.movieModel.create({input: result.data});
+        const newMovie = await this.movieModel.create({ input: res.body }); // await this.movieModel.create({input: result.data});
         // se retorna la respuesta
         res.status(201).json(newMovie);
     };

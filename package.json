@@ -4,6 +4,8 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
+    "dev:local": "SERVER_TYPE=local && nodemon app.js",
+    "dev:mysql": "SERVER_TYPE=mysql && nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,8 +14,12 @@
   "description": "",
   "dependencies": {
     "cors": "2.8.5",
+    "dotenv": "^16.5.0",
     "express": "5.1.0",
     "mysql2": "^3.14.1",
-    "zod": "3.24.4"
+    "zod": "^3.25.28"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
