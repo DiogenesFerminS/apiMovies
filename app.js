@@ -20,9 +20,15 @@ export const createApp = ({movieModel})=>{
     app.disable('x-powered-by');
     //se inicia el servidor en el puerto 
 
-    app.use((req, res)=>{
-       return res.status(404).json({message: 'Route not found'});
-    });
+    //Solucion Paolo
+    // app.use((req, res)=>{
+    //    return res.status(404).json({message: 'Route not found'});
+    // });
+
+    //Solucion Rafael
+    app.all('/*splat', (req, res, next)=>{
+        res.status(404).json({message: 'Route not found'});
+    })
 
     app.use((err, req, res, next)=>{
         //console.log(err);
